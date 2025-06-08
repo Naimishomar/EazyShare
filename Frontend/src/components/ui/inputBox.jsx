@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InputBox = () => {
+const InputBox = ({text, setText, click, load}) => {
   return (
     <div className="relative flex justify-center items-center pt-10 md:py-5">
       {/* Grid Background */}
@@ -34,13 +34,15 @@ const InputBox = () => {
           <input
             type="text"
             name="text"
+            value={text}
+            onChange={(e)=> setText(e.target.value)}
             placeholder="Want to generate from AI..."
             className="w-full bg-transparent text-white placeholder-[#c0b9c0] outline-none"
           />
 
           {/* Filter Icon */}
         <div>
-            <button className="py-2 px-5 rounded-lg flex justify-center items-center gap-3 bg-[#1C1A1C] cursor-pointer transition-all duration-[450ms] ease-in-out hover:bg-gradient-to-t hover:from-[#A47CF3] hover:to-[#683FEA] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-4px_0_rgba(0,0,0,0.2),0_0_0_4px_rgba(255,255,255,0.2),0_0_180px_0_#9917FF] group">
+            <button className="py-2 px-5 rounded-lg flex justify-center items-center gap-3 bg-[#1C1A1C] cursor-pointer transition-all duration-[450ms] ease-in-out hover:bg-gradient-to-t hover:from-[#A47CF3] hover:to-[#683FEA] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-4px_0_rgba(0,0,0,0.2),0_0_0_4px_rgba(255,255,255,0.2),0_0_180px_0_#9917FF] group" onClick={click}>
                 <svg
                 height={30}
                 width={30}
@@ -50,7 +52,7 @@ const InputBox = () => {
                 <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z" />
                 </svg>
                 <span className="text-[#AAAAAA] font-semibold text-base group-hover:text-white transition-colors duration-300">
-                Generate
+                {(load)? 'Generate':'Loading'}
                 </span>
             </button>
         </div>

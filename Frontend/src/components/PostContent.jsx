@@ -7,7 +7,9 @@ function PostContent() {
   const [content, setContent] = useState('');
   const textareaRef = useRef(null);
   const [title, setTitle] = useState('');
-  const [code, setCode] = useState('')
+  const [code, setCode] = useState('');
+  const [aiGenerated, setAiGenerated] = useState('')
+  const [load, setLoad] = useState(true)
 
   const postData = async()=>{
     try {
@@ -24,7 +26,7 @@ function PostContent() {
         const data = await response.json();
         const result = data.setData.customId;
         setCode(result);
-        toast.success("Sharing code generated successfully");
+        toast.success("Sharing code generated successfully✅");
     } catch (error) {
         console.error("Internal Server error",error);
         toast.error(error);
@@ -41,13 +43,45 @@ function PostContent() {
     }
   };
 
+  const callGemini = async()=>{
+    try {
+      setLoad(false);
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`,{
+        method: "POST",
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "contents": [
+            {
+              "parts": [
+                {
+                  "text": `${aiGenerated}`
+                }
+              ]
+            }
+          ]
+        })  
+      })
+      const data = await response.json();
+      if(data.candidates[0].content.parts[0].text){
+        setLoad(true)
+        setContent(data.candidates[0].content.parts[0].text);
+        toast.success("Data is generated successfully✅")
+      }
+    } catch (error) {
+        console.error("Internal Server error",error);
+        toast.error(error);
+    }
+  }
+
   const handleErase = () => {
     setContent('');
   };
 
   return (
     <div className="relative w-[90vw] md:w-[70vw] mx-auto">
-      <InputBox />
+      <InputBox text={aiGenerated} setText={setAiGenerated} click={callGemini} load={load} />
       {/* Title Input */}
       <h1 className='text-md font-medium'>Sharing Code:{code}</h1>
       <div className='p-[2px] rounded bg-gradient-to-r from-indigo-500 to-pink-600 mb-5'>
@@ -82,7 +116,7 @@ function PostContent() {
       <div className="flex w-full justify-between py-1.5">
         <div
           onClick={handleCopy}
-          className='flex items-center cursor-pointer border-2 border-indigo-500 hover:bg-indigo-500 hover:text-black rounded-md px-3'
+          className='flex items-center cursor-pointer border-2 border-indigo-500 hover:bg-indigo-500 hover:text-black text-indigo-500 rounded-md px-3'
         >
           <h1 className='font-bold'>Copy</h1>
           <IconButton variant="text" color="blue-gray" size="sm" className='cursor-pointer'>
@@ -95,7 +129,7 @@ function PostContent() {
           </IconButton>
         </div>
 
-        <Button size="sm" className="flex items-center cursor-pointer border-2 border-pink-500 hover:bg-pink-500 hover:text-black rounded-md px-5 md:px-10" onClick={postData}>Share Content</Button>
+        <Button size="sm" className="flex items-center cursor-pointer border-2 text-pink-500 border-pink-500 hover:bg-pink-500 hover:text-black rounded-md px-5 md:px-10" onClick={postData}>Share Content</Button>
 
         <div className="flex gap-6">
           <Button
@@ -103,13 +137,16 @@ function PostContent() {
             size="sm"
             color="red"
             variant="text"
-            className='flex items-center cursor-pointer border-2 border-pink-400 hover:bg-pink-400 hover:text-black rounded-md px-3'
+            className='flex items-center cursor-pointer border-2 text-pink-400 border-pink-400 hover:bg-pink-400 hover:text-black rounded-md px-3'
           >
             Erase All
           </Button>
         </div>
       </div>
       <h1 className='text-center text-2xl mt-5 font-bold'>Share This Code:{code}</h1>
+      <label className="flex justify-center text-xl font-bold px-2 py-1 rotate-[-1deg] brutalist-label text-red-500">
+        (Code Valid for only 15 minutes)
+      </label>
     </div>
   );
 }

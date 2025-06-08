@@ -31,6 +31,7 @@ function Home() {
 
   return (
     <div className='w-full'>
+        <div className='w-80 h-80 hidden md:block rounded-full bg-gradient-to-br from-[#a47cf372] to-[#4079ff79] absolute top-[5%] left-[5%] blur-3xl'></div>
         <div className='pt-10'>
             <RotatingText
                 texts={['- Just write and send', '- Paste Share Done']} 
@@ -53,12 +54,17 @@ function Home() {
             <label className="absolute -left-1 top-12 text-sm font-bold px-2 py-1 rotate-[-1deg] transition-all duration-300 ease-[cubic-bezier(0.25,0.8,0.25,1)] z-10 brutalist-label">
                 Enter sharing code
             </label>
+            <label className="absolute left-6 bottom-10 text-sm font-bold px-2 py-1 rotate-[-1deg] transition-all duration-300 ease-[cubic-bezier(0.25,0.8,0.25,1)] z-10 brutalist-label text-red-500">
+                Code Valid for only 15 minutes
+            </label>
         </div>
+
+        <div className='w-70 h-70 hidden md:block rounded-full bg-gradient-to-br from-[#7ccff377] to-[#407cff7c] absolute top-[20%] right-[-15%] blur-3xl'></div>
 
         <div className=''>
             <GradientText
                 colors={["#A47CF3", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
-                animationSpeed={3}
+                animationSpeed={10}
                 showBorder={false}
                 className="custom-class text-center"
                 >
@@ -69,7 +75,11 @@ function Home() {
         <Link to='/share'>
             <ShareButton/>
         </Link>
+
+        <div className='w-70 h-70 hidden md:block rounded-full bg-gradient-to-br from-[#a47cf388] to-[#4079ff80] absolute top-[45%] left-[-15%] blur-3xl'></div>
+
         <div className='flex justify-center items-center flex-wrap w-full px-10 py-5'>
+            <div className='w-100 h-100 hidden md:block rounded-full bg-gradient-to-br from-[#a47cf35f] to-[#4079ff79] absolute top-[65%] right-[-15%] blur-3xl'></div>
             <img src="/collaborator.png" className='' alt="" />
             <div className=''>
                 <h1 className='text-5xl font-semibold text-blue-400'>What EazyShare Offers...</h1>

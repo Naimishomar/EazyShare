@@ -52,7 +52,7 @@ function PostContent() {
       <div className="flex w-full justify-between py-1.5">
         <div
           onClick={handleCopy}
-          className='flex items-center cursor-pointer border-2 border-indigo-500 hover:bg-indigo-500 hover:text-black rounded-md px-3'
+          className='flex items-center cursor-pointer border-2 text-indigo-500 border-indigo-500 hover:bg-indigo-500 hover:text-black rounded-md px-3'
         >
           <h1 className='font-bold'>Copy Text</h1>
           <IconButton variant="text" color="blue-gray" size="sm" className='cursor-pointer'>
@@ -67,6 +67,9 @@ function PostContent() {
 
       </div>
       <h1 className='text-center text-2xl mt-5 font-bold'>Share This Code:<span className='text-purple-300'>{code}</span></h1>
+      <label className="flex justify-center text-xl font-bold px-2 py-1 rotate-[-1deg] brutalist-label text-red-500">
+        (Code Valid for only 15 minutes)
+      </label>
     </div>
   );
 }
