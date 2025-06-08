@@ -13,7 +13,7 @@ function Home() {
 
   const getData = async()=>{
     try {
-        const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}get/${code}`,{
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/get/${code}`,{
             method: "GET",
             headers:{
                 'Content-Type':'application/json'

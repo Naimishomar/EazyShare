@@ -13,7 +13,7 @@ function PostContent() {
 
   const postData = async()=>{
     try {
-        const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}share`,{
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/share`,{
             method: "POST",
             headers:{
                 'Content-Type':'application/json'
