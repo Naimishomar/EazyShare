@@ -3,7 +3,7 @@ import { Button, IconButton } from "@material-tailwind/react";
 import InputBox from './ui/inputBox';
 import { useLocation } from 'react-router-dom';
 
-function PostContent() {
+function GetContent() {
   const [content, setContent] = useState('');
   const textareaRef = useRef(null);
   const [title, setTitle] = useState('');
@@ -74,4 +74,4 @@ function PostContent() {
   );
 }
 
-export default PostContent;
+export default GetContent;
