@@ -12,7 +12,7 @@ app.use(express.json());
 app.use('/', contentRoute)
 
 app.get('/', (req, res) => {
-    res.send('Server running!');
+    res.send('Server running!💖');
 });
 
 app.listen(PORT,()=>{
