@@ -11,6 +11,10 @@ app.use(cors({origin: "*"}));
 app.use(express.json());
 app.use('/', contentRoute)
 
+app.get('/', (req, res) => {
+    res.send('Server running!');
+});
+
 app.listen(PORT,()=>{
     console.log(`Server is running successfully on PORT ${PORT}✅`);
     connectDb();
