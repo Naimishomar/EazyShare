@@ -13,9 +13,11 @@ function PostContent() {
 
   const postData = async()=>{
     try {
-      if(aiGenerated.length === 0){
-        toast.error("Please type something")
+      if(!content || content.trim().length === 0){
+        toast.error("Please type something");
+        return;
       }
+      else{
         const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/share`,{
             method: "POST",
             headers:{
@@ -30,6 +32,7 @@ function PostContent() {
         const result = data.setData.customId;
         setCode(result);
         toast.success("Sharing code generated successfully✅");
+      }
     } catch (error) {
         console.error("Internal Server error",error);
         toast.error(error);
