@@ -2,6 +2,7 @@ import express from 'express';
 import { customAlphabet } from 'nanoid';
 import Data from '../models/content.model.js';
 import {UAParser} from 'ua-parser-js';
+import connectDb from '../db/connectDb.js';
 
 export const postData = async(req,res)=>{
     try {
