@@ -28,6 +28,7 @@ export const postData = async(req,res)=>{
 
 export const getData = async(req,res)=>{
     try {
+        await connectDb();
         const {customId} = req.params;
         if(!customId){
             return res.status(401).json({message:"ID is required", success: false});
