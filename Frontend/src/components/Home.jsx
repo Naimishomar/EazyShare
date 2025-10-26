@@ -72,9 +72,7 @@ function Home() {
             </GradientText>
             <p className='text-center text-3xl mt-15 md:mt-5  px-5 md:text-5xl'><span className='font-semibold text-pink-500'>Type. Share. Done.</span> A lightning-fast way to share text and code — no fluff, no ads, just your words and a link.</p>
         </div>
-        <Link to='/share'>
             <ShareButton/>
-        </Link>
 
         <div className='w-70 h-70 hidden md:block rounded-full bg-gradient-to-br from-[#a47cf388] to-[#4079ff80] absolute top-[45%] left-[-15%] blur-3xl'></div>
 

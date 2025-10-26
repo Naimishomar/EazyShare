@@ -13,6 +13,9 @@ function PostContent() {
 
   const postData = async()=>{
     try {
+      if(aiGenerated.length === 0){
+        toast.error("Please type something")
+      }
         const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/share`,{
             method: "POST",
             headers:{
@@ -51,7 +54,7 @@ function PostContent() {
         headers:{
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
+        body: JSON.stringify({ 
           "contents": [
             {
               "parts": [
