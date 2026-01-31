@@ -16,6 +16,6 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT,()=>{
-    console.log(`Server is running successfully on server: https://localhost:${PORT}✅`);
+    console.log(`Server is running successfully on server: http://localhost:${PORT}✅`);
     connectDb();
 })

@@ -1,7 +1,6 @@
 import express from 'express';
 import { customAlphabet } from 'nanoid';
 import Data from '../models/content.model.js';
-import {UAParser} from 'ua-parser-js';
 import connectDb from '../db/connectDb.js';
 
 export const postData = async(req,res)=>{
@@ -12,13 +11,10 @@ export const postData = async(req,res)=>{
         }
         const nanoidNumeric  = customAlphabet('0123456789', 5);
         const customId = nanoidNumeric();
-        const parser = new UAParser(req.headers['user-agent']);
-        const result = parser.getResult();
         const setData = await Data.create({
             title: title,
             content: content,
             customId: customId,
-            user: result.os.name
         })
         return res.status(200).json({message:"Content is ready to share", setData, success: true});
     } catch (error) {
