@@ -25,14 +25,13 @@ export const postData = async(req,res)=>{
 
 export const getData = async(req,res)=>{
     try {
-        await connectDb();
         const {customId} = req.params;
         if(!customId){
-            return res.status(401).json({message:"ID is required", success: false});
+            return res.status(400).json({message:"ID is required", success: false});
         }
         const data = await Data.findOne({customId});
         if(!data || data.length === 0){
-            return res.status(401).json({message:"ID is not valid, please verify again", success: false});
+            return res.status(404).json({message:"ID is not valid, please verify again", success: false});
         }
         const dataDetails = {
             title: data.title,
